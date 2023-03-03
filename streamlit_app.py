@@ -25,7 +25,8 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 
 streamlit.header('Fruityvice fruit advice!')
-try:
+
+ try:
     fruit_choice = streamlit.text_input('What fuit would you like info about?')
     if not fruit_choice:
                  streamlit.error('Please select something')
@@ -35,7 +36,10 @@ try:
            streamlit.dataframe(fruityvice_normalized)
            
 
-
+ except URLError as e:
+    streamlit.error();
+    
+    
 streamlit.stop();
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
